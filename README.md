@@ -7,15 +7,24 @@
 * When we revise texts with ChatGPT, we use the
 gpt-3.5-turbo API provided by OpenAI. All experiments that call gpt-3.5-turbo API in
 the paper are done before June 2023, with the gpt-3.5-turbo API being gpt-3.5-turbo-0301.
+
+## Installation
+Set up your environment to run the detection code by following these steps:
+
+ Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+```
+Then run the code 
+   ```bash
+   python finance_bart_auroc.py
+```
+
 ## Code
 * To evaluate the detection performance of our method on the Finance dataset, please run the code "python finance_bart_auroc.py".
   
   We use the BARTScore-CNN [2] as
 the similarity metric to calculate similarity scores.
-
-
-
-
 
  ## Reference
 [1] Biyang Guo, Xin Zhang, Ziyuan Wang, Minqi Jiang,
