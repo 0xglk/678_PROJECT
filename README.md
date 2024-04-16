@@ -28,9 +28,9 @@ the similarity metric to calculate similarity scores.
 
 ### Key Addition:
 - **Switching Compute Devices Section**: Added a section on how to switch the compute device from CPU to GPU for users who might want to utilize GPU acceleration. 
-change on bart_score.py and finance_bart_auroc.py code 
+change on **bart_score.py** and **finance_bart_auroc.py** code 
 Find the line in each script that specifies the device:
-change it from "device='cpu' to device='cuda:0'"
+change it from "**device='cpu'** to **device='cuda:0'**"
 
 
  ## Reference
