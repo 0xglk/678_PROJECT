@@ -1,7 +1,75 @@
+import argparse
 import json
 import time
+import openai
+# OpenAI API key setup
+client = openai.api_key=''
 from bart_score import BARTScorer
+import torch
+import torch.nn as nn
+import traceback
+from transformers import BartTokenizer, BartForConditionalGeneration
+from typing import List
+import numpy as np
 from sklearn.metrics import roc_auc_score
+
+# Set up command line argument parsing
+parser = argparse.ArgumentParser(description="Run BART Scorer with optional commands.")
+parser.add_argument("-c", "--custom-text", type=str, help="Print custom text and exit.")
+
+args = parser.parse_args()
+
+if args.custom_text:
+    # Initialize the BARTScorer
+    scorer = BARTScorer(device='cpu') 
+    # Initialize the OpenAI client (ensure you've set up your API key correctly)
+    client = openai.ChatCompletion()
+    # Function to get revision from ChatGPT
+    # Function to get revision from ChatGPT
+    def get_revision(text):
+        try:
+            response = client.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": "Revise the following text:"},
+                    {"role": "user", "content": text}
+                ]
+            )
+            revised_text = response.choices[0].message['content']
+            return revised_text
+        except Exception as e:
+            print(f"Error in getting revision from ChatGPT: {e}")
+            return text  # Return original text if error
+
+    # Function to compute similarity using BARTScore
+    def compute_similarity(original, revised):
+        try:
+            scores = scorer.score([original], [revised])
+            return scores[0]  # Assuming score method returns a list of scores
+        except Exception as e:
+            print(f"Error in computing similarity: {e}")
+            return 0  # Return a neutral score in case of error
+
+    # Main function to evaluate a text
+    def evaluate_text(text):
+        print(f"Original Text: {text}")
+        revised_text = get_revision(text)
+        print(f"Revised Text: {revised_text}")
+        similarity_score = compute_similarity(text, revised_text)
+        print(f"Similarity Score: {similarity_score}")
+
+        # Define a threshold for determining LLM-generated text
+        threshold = 0.5  # This value should be empirically determined based on validation data
+        is_llm_generated = similarity_score >= threshold
+
+        return is_llm_generated
+
+    # Example usage
+    original_text = args.custom_text
+    is_generated = evaluate_text(original_text)
+    print(f"Is the text LLM-generated? {'Yes' if is_generated else 'No'}")
+
+    exit()
 
 # Initializing BARTScorer
 print("Initializing BARTScorer...")
