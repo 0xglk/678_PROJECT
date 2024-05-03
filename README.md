@@ -22,6 +22,13 @@ Then run the code
 
 ## Code
 * To evaluate the detection performance of our method on the Finance dataset, please run the code "python finance_bart_auroc.py".
+* Before running the program to enable **LLM functionality**, you need to add the ChatGPT API Key to the code. It's simply done by including it in the code.
+
+**OPEN AND EDIT finance_bart_auroc.py**
+   ```bash
+   # OpenAI API key setup
+client = openai.api_key='YOUR KEY HERE'
+```
   
   We use the BARTScore-CNN [2] as
 the similarity metric to calculate similarity scores.
