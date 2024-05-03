@@ -33,6 +33,22 @@ client = openai.api_key='YOUR KEY HERE'
   We use the BARTScore-CNN [2] as
 the similarity metric to calculate similarity scores.
 
+## Command 
+
+| Options I        | Options        | Example                                    |
+| ---------------- |--------------- | -------------------------------------------|
+| LLM functionality| -c             | `YOUR TEXT`                                |
+
+## Edit File Information
+
+| Variable        | Default Values | You Can Edit                                                       |
+| --------------- | -------------- | ------------------------------------------------------------------ |
+| api_key         | `EMPTY`        | `Change It To Your API Key`                                        |
+| device          | `cpu`          | `You can Change It To to device='cuda:0'`                          |
+| batch_size      | `2`            | `You can Change It To to any size you want in def score funcation `|
+
+- Switching from device='cpu' to device='cuda:0' tells your program to use a GPU instead of a CPU, significantly speeding up tasks like training machine learning models by utilizing the GPU's superior processing power for parallel computations
+
 ### Key Addition:
 - **Switching Compute Devices Section**: Added a section on how to switch the compute device from CPU to GPU for users who might want to utilize GPU acceleration. 
 change on **bart_score.py** and **finance_bart_auroc.py** code 
