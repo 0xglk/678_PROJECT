@@ -37,7 +37,7 @@ the similarity metric to calculate similarity scores.
 
 | Options I        | Options        | Example                                    |
 | ---------------- |--------------- | -------------------------------------------|
-| LLM functionality| -c             | `YOUR TEXT`                                |
+| LLM functionality| -c             | `-c 'YOUR TEXT'`                                |
 
 ## Edit File Information
 
